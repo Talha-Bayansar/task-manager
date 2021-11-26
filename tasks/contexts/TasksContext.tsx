@@ -16,16 +16,19 @@ export const TasksProvider = ({ children }) => {
 
 	const getTasks = async () => {
 		const data = await get<Task[]>(tasksUrl);
+		console.log(data);
 		return data;
 	};
 
 	const getTasksToday = async () => {
 		const data = await get<Task[]>(`${tasksUrl}/today`);
+		console.log(data);
 		return data;
 	};
 
 	const getTasksDone = async () => {
 		const data = await get<Task[]>(`${tasksUrl}/done`);
+		console.log(data);
 		return data;
 	};
 

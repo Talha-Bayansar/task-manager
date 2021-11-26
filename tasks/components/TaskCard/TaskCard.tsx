@@ -26,9 +26,12 @@ export const TaskCard = ({ task, className }: Props) => {
 	};
 
 	return (
-		<div className={`${styles.taskCard} ${className}`}>
+		<div
+			style={{ backgroundColor: task.subject?.color }}
+			className={`${styles.taskCard} ${className}`}
+		>
 			<div className={styles.taskCardDetails}>
-				<Chip size="sm" name="PAV" />
+				<Chip size="sm" name={task.subject?.title} />
 				<p className={styles.taskCardHeading}>{task.description}</p>
 				<div className={styles.taskCardDeadline}>
 					<p>{getDeadlineDate()}</p>
