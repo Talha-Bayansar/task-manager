@@ -10,6 +10,7 @@ export const LoginForm = () => {
 		email: '',
 		password: ''
 	});
+	const [errorMessage, setErrorMessage] = useState<string>('');
 	const router = useRouter();
 
 	const handleSubmit = (e) => {
@@ -17,8 +18,11 @@ export const LoginForm = () => {
 		const { email, password } = formValues;
 		login(email, password).then((res) => {
 			if (res.error) {
-				console.log('Error');
+				setErrorMessage(
+					'Email and password combination does not match.'
+				);
 			} else {
+				setErrorMessage('');
 				router.push('/');
 			}
 		});
@@ -54,11 +58,13 @@ export const LoginForm = () => {
 				label="Password"
 				type="password"
 				required={true}
+				inputOptions={{ minLength: '6' }}
 			/>
 			<SubmitButton
 				className={styles.loginFormSubmitButton}
 				name="Login"
 			/>
+			{errorMessage && <p className="error-message">{errorMessage}</p>}
 		</form>
 	);
 };
