@@ -41,7 +41,7 @@ export const TaskCard = ({ task, className }: Props) => {
 				</button>
 				<button
 					className={`${styles.taskCardCheckButton} ${
-						task.isDone && styles.checked
+						task.isChecked && styles.checked
 					}`}
 				></button>
 			</div>

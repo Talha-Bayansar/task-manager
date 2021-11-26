@@ -4,6 +4,8 @@ import { useHttpContext } from '../../http';
 
 interface ITasksContext {
 	getTasks: () => Promise<Task[]>;
+	getTasksToday: () => Promise<Task[]>;
+	getTasksDone: () => Promise<Task[]>;
 }
 
 const TasksContext = createContext<ITasksContext | null>(null);
@@ -17,8 +19,20 @@ export const TasksProvider = ({ children }) => {
 		return data;
 	};
 
+	const getTasksToday = async () => {
+		const data = await get<Task[]>(`${tasksUrl}/today`);
+		return data;
+	};
+
+	const getTasksDone = async () => {
+		const data = await get<Task[]>(`${tasksUrl}/done`);
+		return data;
+	};
+
 	const api = {
-		getTasks
+		getTasks,
+		getTasksToday,
+		getTasksDone
 	};
 
 	return (

@@ -10,13 +10,13 @@ export interface Tab {
 }
 
 export const TasksPage = () => {
-	const { getTasks } = useTasksContext();
+	const { getTasks, getTasksToday, getTasksDone } = useTasksContext();
 
 	const tabsTemplate: Tab[] = [
 		{
 			name: 'Today',
 			active: false,
-			fetchFunction: getTasks
+			fetchFunction: getTasksToday
 		},
 		{
 			name: 'Upcoming',
@@ -26,9 +26,17 @@ export const TasksPage = () => {
 		{
 			name: 'Task Done',
 			active: false,
-			fetchFunction: getTasks
+			fetchFunction: getTasksDone
 		}
 	];
+
+	const findTab = (name: string) => {
+		return tabsTemplate.find((tab) => tab.name === name);
+	};
+
+	const getActiveTab = () => {
+		return tabs.find((tab) => tab.active);
+	};
 
 	const [tabs, setTabs] = useState<Tab[]>(
 		tabsTemplate.map((tab) => {
@@ -43,14 +51,6 @@ export const TasksPage = () => {
 			return tab;
 		})
 	);
-
-	const findTab = (name: string) => {
-		return tabsTemplate.find((tab) => tab.name === name);
-	};
-
-	const getActiveTab = () => {
-		return tabs.find((tab) => tab.active);
-	};
 
 	const handleTabClick = (e) => {
 		const name = e.target.id;
@@ -76,7 +76,7 @@ export const TasksPage = () => {
 				tabs={tabs}
 				onClick={handleTabClick}
 			/>
-			<TaskList fetchFunction={getActiveTab().fetchFunction} />
+			<TaskList tab={getActiveTab()} />
 		</div>
 	);
 };
