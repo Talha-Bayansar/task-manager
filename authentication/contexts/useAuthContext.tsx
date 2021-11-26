@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getCookie, setCookies } from 'cookies-next';
+import { getCookie, removeCookies, setCookies } from 'cookies-next';
 import { useRouter } from 'next/dist/client/router';
 import { CookieValueTypes } from 'cookies-next/lib/types';
 import { User } from '..';
 
 interface IAuthContext {
 	login: (email: string, password: string) => Promise<any>;
+	logout: () => Promise<any>;
 	getToken: () => CookieValueTypes;
 	getUser: () => User;
 }
@@ -68,7 +69,13 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
-	const api = { login, getToken, getUser };
+	const logout = async () => {
+		removeCookies('token');
+		removeCookies('user');
+		router.push('/login');
+	};
+
+	const api = { login, getToken, getUser, logout };
 	return <AuthContext.Provider value={api}>{children}</AuthContext.Provider>;
 };
 

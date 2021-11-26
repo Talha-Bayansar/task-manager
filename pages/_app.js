@@ -4,6 +4,7 @@ import { HttpProvider } from '../http';
 import { TasksProvider } from '../tasks';
 import { AuthProvider } from '../authentication';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { MenuProvider } from '../menu';
 
 const queryClient = new QueryClient();
 
@@ -13,9 +14,11 @@ function MyApp({ Component, pageProps }) {
 			<HttpProvider>
 				<QueryClientProvider client={queryClient}>
 					<TasksProvider>
-						<Layout>
-							<Component {...pageProps} />
-						</Layout>
+						<MenuProvider>
+							<Layout>
+								<Component {...pageProps} />
+							</Layout>
+						</MenuProvider>
 					</TasksProvider>
 				</QueryClientProvider>
 			</HttpProvider>

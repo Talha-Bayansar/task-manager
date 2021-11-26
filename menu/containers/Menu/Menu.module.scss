@@ -1,0 +1,40 @@
+.menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	width: 100vw;
+	background-color: white;
+	padding: 1.25rem;
+
+	.menuHeading {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+
+		.closeButton {
+			display: block;
+			background-color: transparent;
+			color: black;
+			border: none;
+			padding: 0.25rem;
+			border-radius: 8px;
+
+			&:active {
+				background-color: #e8e8e8;
+			}
+		}
+	}
+
+	.menuList {
+		display: flex;
+		flex-direction: column;
+		margin-top: 3rem;
+
+		.menuListItem {
+			margin: 1rem 0;
+		}
+	}
+}
