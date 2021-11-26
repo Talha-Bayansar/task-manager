@@ -1,8 +1,8 @@
 import '../styles/globals.scss';
 import { Layout } from '../components';
-import { AuthProvider } from '../auth';
 import { HttpProvider } from '../http';
 import { TasksProvider } from '../tasks';
+import { AuthProvider } from '../authentication';
 
 function MyApp({ Component, pageProps }) {
 	return (

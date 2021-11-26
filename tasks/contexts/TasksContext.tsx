@@ -1,18 +1,24 @@
 import React, { createContext, useContext, useState } from 'react';
+import { Task } from '..';
 import { useHttpContext } from '../../http';
 
-const TasksContext = createContext(null);
+interface ITasksContext {
+	getTasks: () => Promise<Task[]>;
+}
+
+const TasksContext = createContext<ITasksContext | null>(null);
 
 export const TasksProvider = ({ children }) => {
-	const tasksUrl = `${process.env.NEXT_PUBLIC_API_URL}/tasks`;
+	const tasksUrl = `${process.env.NEXT_PUBLIC_API_URL}/tests`;
 	const { get } = useHttpContext();
 
-	const getTests = async () => {
-		await get(tasksUrl);
+	const getTasks = async () => {
+		const data = await get<Task[]>(tasksUrl);
+		return data;
 	};
 
 	const api = {
-		getTests
+		getTasks
 	};
 
 	return (

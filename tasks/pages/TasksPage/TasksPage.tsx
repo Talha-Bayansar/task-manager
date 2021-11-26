@@ -1,10 +1,25 @@
-import React, { ContextType, useEffect } from 'react';
-import { useTasksContext } from '../..';
+import React, { useEffect, useState } from 'react';
+import { Task, useTasksContext } from '../..';
 
 export const TasksPage = () => {
-	const { getTests } = useTasksContext();
+	const { getTasks } = useTasksContext();
+	const [tasks, setTasks] = useState<Task[]>([]);
 	useEffect(() => {
-		getTests();
-	}, [getTests]);
-	return <div>List of tasks</div>;
+		getTasks().then((data) => setTasks(data));
+	}, [getTasks]);
+	return (
+		<div>
+			List of tasks
+			<div>
+				{tasks.map((task) => (
+					<div key={task.id}>
+						<p>ID: {task.id}</p>
+						<p>description: {task.description}</p>
+						<p>isDone: {task.isDone ? 'true' : 'false'}</p>
+						<p>deadline: {task.deadline}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	);
 };
