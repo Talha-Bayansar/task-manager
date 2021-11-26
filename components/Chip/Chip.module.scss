@@ -6,6 +6,21 @@
 	border: 1px solid black;
 	border-radius: 20px;
 	background-color: transparent;
+
+	&:active {
+		background-color: black;
+		color: white;
+	}
+}
+
+.active {
+	background-color: black;
+	color: white;
+
+	&:active {
+		background-color: white;
+		color: black;
+	}
 }
 
 .small {

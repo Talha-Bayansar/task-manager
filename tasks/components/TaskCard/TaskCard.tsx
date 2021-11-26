@@ -6,9 +6,10 @@ import { Chip } from '../../../components';
 
 interface Props {
 	task: Task;
+	className?: any;
 }
 
-export const TaskCard = ({ task }: Props) => {
+export const TaskCard = ({ task, className }: Props) => {
 	const getDeadlineDate = () => {
 		return new Date(task.deadline).toLocaleDateString('default', {
 			day: '2-digit',
@@ -25,7 +26,7 @@ export const TaskCard = ({ task }: Props) => {
 	};
 
 	return (
-		<div className={styles.taskCard}>
+		<div className={`${styles.taskCard} ${className}`}>
 			<div className={styles.taskCardDetails}>
 				<Chip size="sm" name="PAV" />
 				<p className={styles.taskCardHeading}>{task.description}</p>

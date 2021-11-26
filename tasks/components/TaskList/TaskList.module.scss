@@ -1,0 +1,9 @@
+.taskList {
+	display: flex;
+	flex-direction: column;
+	margin-top: 3rem;
+
+	.taskListItem {
+		margin: 1rem 0;
+	}
+}
