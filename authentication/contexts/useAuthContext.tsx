@@ -2,11 +2,12 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { getCookie, setCookies } from 'cookies-next';
 import { useRouter } from 'next/dist/client/router';
 import { CookieValueTypes } from 'cookies-next/lib/types';
+import { User } from '..';
 
 interface IAuthContext {
 	login: (email: string, password: string) => Promise<any>;
 	getToken: () => CookieValueTypes;
-	getUser: () => CookieValueTypes;
+	getUser: () => User;
 }
 
 const AuthContext = createContext<IAuthContext | null>(null);
@@ -21,7 +22,14 @@ export const AuthProvider = ({ children }) => {
 		getToken() !== null
 	);
 
-	const getUser = () => getCookie('user');
+	const getUser = () => {
+		const userData = getCookie('user');
+		let userObject: User | null = null;
+		if (userData) {
+			userObject = JSON.parse(userData.toString()) as User;
+		}
+		return userObject;
+	};
 
 	useEffect(() => {
 		if (router.pathname !== '/login') {
@@ -61,7 +69,11 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const api = { login, getToken, getUser };
-	return <AuthContext.Provider value={api}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={api}>
+			{isAuthenticated ? children : <p>You are not logged in!</p>}
+		</AuthContext.Provider>
+	);
 };
 
 export const useAuthContext = () => useContext(AuthContext);

@@ -9,7 +9,7 @@ interface ITasksContext {
 const TasksContext = createContext<ITasksContext | null>(null);
 
 export const TasksProvider = ({ children }) => {
-	const tasksUrl = `${process.env.NEXT_PUBLIC_API_URL}/tests`;
+	const tasksUrl = `${process.env.NEXT_PUBLIC_API_URL}/tasks`;
 	const { get } = useHttpContext();
 
 	const getTasks = async () => {
