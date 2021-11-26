@@ -69,11 +69,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const api = { login, getToken, getUser };
-	return (
-		<AuthContext.Provider value={api}>
-			{isAuthenticated ? children : <p>You are not logged in!</p>}
-		</AuthContext.Provider>
-	);
+	return <AuthContext.Provider value={api}>{children}</AuthContext.Provider>;
 };
 
 export const useAuthContext = () => useContext(AuthContext);
