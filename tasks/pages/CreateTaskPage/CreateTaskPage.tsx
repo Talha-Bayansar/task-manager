@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/dist/client/router';
+import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useTasksContext } from '../..';
 import { InputField, SelectField, SubmitButton } from '../../../components';
+import { Subject, useSubjectsContext } from '../../../subjects';
+import { TaskDto } from '../../models/task.dto';
 import styles from './CreateTaskPage.module.scss';
 
 export const CreateTaskPage = () => {
-	const subjectOptions = [
-		{ name: 'PAV', value: 'pav' },
-		{ name: 'Stage', value: 'stage' },
-		{ name: 'Biologie', value: 'biologie' }
-	];
+	const { getSubjects } = useSubjectsContext();
+	const router = useRouter();
+	const { data, isLoading, error } = useQuery('subjects', getSubjects);
 
 	const { createTask } = useTasksContext();
+
 	const [formValues, setFormValues] = useState({
-		subject: subjectOptions[0].value,
+		subject: '',
 		description: '',
 		deadline: ''
 	});
@@ -23,9 +26,17 @@ export const CreateTaskPage = () => {
 		setFormValues({ ...formValues, [name]: value });
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(formValues);
+		const { deadline, description, subject } = formValues;
+		const finalSubject = data.find((sub) => subject === sub.id);
+		const taskDto: TaskDto = {
+			deadline: deadline,
+			description: description,
+			subject: finalSubject
+		};
+		await createTask(taskDto);
+		router.push('/');
 	};
 
 	return (
@@ -37,7 +48,9 @@ export const CreateTaskPage = () => {
 			<SelectField
 				className={styles.formField}
 				name="subject"
-				options={subjectOptions}
+				subjects={data}
+				setFormValues={setFormValues}
+				formValues={formValues}
 			/>
 			<InputField
 				className={styles.formField}

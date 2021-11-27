@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import {
-	CreateActionButton,
-	Tabs,
-	TaskCard,
-	TaskList,
-	useTasksContext
-} from '../..';
+import { CreateActionButton, Tabs, TaskList, useTasksContext } from '../..';
 import styles from './TaskPage.module.scss';
 
 export interface Tab {
@@ -83,6 +76,7 @@ export const TasksPage = () => {
 				onClick={handleTabClick}
 			/>
 			<TaskList tab={getActiveTab()} />
+			<div className={styles.spacing} />
 			<CreateActionButton />
 		</div>
 	);

@@ -1,25 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Subject } from '../../subjects';
 import styles from './SelectField.module.scss';
-
-interface SelectOption {
-	value: string;
-	name: string;
-}
 
 interface Props {
 	className?: any;
 	name: string;
-	options: SelectOption[];
+	subjects: Subject[];
+	setFormValues?: (e: any) => void;
+	formValues?: any;
 }
 
-export const SelectField = ({ className, name, options }: Props) => {
+export const SelectField = ({
+	className,
+	name,
+	subjects,
+	setFormValues,
+	formValues
+}: Props) => {
+	useEffect(() => {
+		if (subjects) {
+			setFormValues({ ...formValues, subject: subjects[0].id });
+		}
+	}, [subjects]);
+
 	return (
 		<div className={`${styles.selectField} ${className}`}>
 			<label htmlFor={name}>Subject</label>
 			<select name={name} id={name}>
-				{options.map((option) => (
-					<option key={option.name} value={option.value}>
-						{option.name}
+				{subjects?.map((subject) => (
+					<option key={subject.id} value={subject.id}>
+						{subject.title}
 					</option>
 				))}
 			</select>

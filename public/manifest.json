@@ -1,6 +1,6 @@
 {
-	"name": "todo",
-	"short_name": "todo",
+	"name": "Task Manager",
+	"short_name": "Task Manager",
 	"icons": [
 		{
 			"src": "/logo-128x128.png",
@@ -17,5 +17,6 @@
 	"background_color": "#ffffff",
 	"start_url": "/",
 	"display": "standalone",
-	"orientation": "portrait"
+	"orientation": "portrait",
+	"purpose": "any maskable"
 }
