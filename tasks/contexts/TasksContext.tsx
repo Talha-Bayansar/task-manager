@@ -1,18 +1,20 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Task } from '..';
 import { useHttpContext } from '../../http';
+import { TaskDto } from '../models/task.dto';
 
 interface ITasksContext {
 	getTasks: () => Promise<Task[]>;
 	getTasksToday: () => Promise<Task[]>;
 	getTasksDone: () => Promise<Task[]>;
+	createTask: (taskDto: TaskDto) => Promise<void>;
 }
 
 const TasksContext = createContext<ITasksContext | null>(null);
 
 export const TasksProvider = ({ children }) => {
 	const tasksUrl = `${process.env.NEXT_PUBLIC_API_URL}/tasks`;
-	const { get } = useHttpContext();
+	const { get, post } = useHttpContext();
 
 	const getTasks = async () => {
 		const data = await get<Task[]>(tasksUrl);
@@ -32,10 +34,16 @@ export const TasksProvider = ({ children }) => {
 		return data;
 	};
 
+	const createTask = async (taskDto: TaskDto) => {
+		const data = await post(`${tasksUrl}`, taskDto);
+		console.log(data);
+	};
+
 	const api = {
 		getTasks,
 		getTasksToday,
-		getTasksDone
+		getTasksDone,
+		createTask
 	};
 
 	return (

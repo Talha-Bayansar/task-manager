@@ -45,7 +45,6 @@ export const LoginForm = () => {
 		>
 			<InputField
 				className={styles.loginFormInputField}
-				htmlFor="email"
 				name="email"
 				label="Email"
 				type="email"
@@ -53,7 +52,6 @@ export const LoginForm = () => {
 			/>
 			<InputField
 				className={styles.loginFormInputField}
-				htmlFor="password"
 				name="password"
 				label="Password"
 				type="password"

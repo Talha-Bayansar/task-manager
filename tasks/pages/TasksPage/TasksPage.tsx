@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { Tabs, TaskCard, TaskList, useTasksContext } from '../..';
+import {
+	CreateActionButton,
+	Tabs,
+	TaskCard,
+	TaskList,
+	useTasksContext
+} from '../..';
 import styles from './TaskPage.module.scss';
 
 export interface Tab {
@@ -77,6 +83,7 @@ export const TasksPage = () => {
 				onClick={handleTabClick}
 			/>
 			<TaskList tab={getActiveTab()} />
+			<CreateActionButton />
 		</div>
 	);
 };
