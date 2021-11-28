@@ -1,8 +1,9 @@
 import React from 'react';
-import { Task } from '../..';
+import { Task, useTasksContext } from '../..';
 import styles from './TaskCard.module.scss';
 import { MdModeEdit } from 'react-icons/md';
 import { Chip } from '../../../components';
+import { useRouter } from 'next/dist/client/router';
 
 interface Props {
 	task: Task;
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export const TaskCard = ({ task, className }: Props) => {
+	const router = useRouter();
+	const { setUpdateTask } = useTasksContext();
 	const getDeadlineDate = () => {
 		return new Date(task.deadline).toLocaleDateString('default', {
 			day: '2-digit',
@@ -23,6 +26,11 @@ export const TaskCard = ({ task, className }: Props) => {
 			hour: '2-digit',
 			minute: '2-digit'
 		});
+	};
+
+	const handleEditClick = () => {
+		setUpdateTask(task.id);
+		router.push(`/tasks/update`);
 	};
 
 	return (
@@ -39,7 +47,10 @@ export const TaskCard = ({ task, className }: Props) => {
 				</div>
 			</div>
 			<div className={styles.taskCardActions}>
-				<button className={styles.taskCardEditButton}>
+				<button
+					onClick={handleEditClick}
+					className={styles.taskCardEditButton}
+				>
 					<MdModeEdit color="white" />
 				</button>
 				<button

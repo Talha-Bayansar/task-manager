@@ -8,6 +8,7 @@ interface Props {
 	required?: boolean;
 	inputOptions?: any;
 	className?: any;
+	value?: any;
 }
 
 export const InputField = ({
@@ -16,7 +17,8 @@ export const InputField = ({
 	type,
 	required = false,
 	inputOptions,
-	className
+	className,
+	value
 }: Props) => {
 	return (
 		<div className={`${styles.inputField} ${className}`}>
@@ -26,6 +28,7 @@ export const InputField = ({
 				name={name}
 				required={required}
 				{...inputOptions}
+				defaultValue={value}
 			/>
 		</div>
 	);
