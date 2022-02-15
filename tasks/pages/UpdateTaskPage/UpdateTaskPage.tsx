@@ -69,7 +69,7 @@ export const UpdateTaskPage = ({ task }: Props) => {
 					label="Deadline"
 					name="deadline"
 					type="datetime-local"
-					value={deadline}
+					value={formValues.deadline}
 					onChange={handleChange}
 				/>
 				<SubmitButton className={styles.formField} name="Update" />
