@@ -1,7 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { Task, TaskForm, useTasksContext } from '../..';
+import { Task, useTasksContext } from '../..';
 import { InputField, SelectField, SubmitButton } from '../../../components';
 import { parseToInputDate } from '../../../helperFunctions';
 import { useSubjectsContext } from '../../../subjects';
@@ -22,6 +22,7 @@ export const UpdateTaskPage = ({ task }: Props) => {
 		description: task.description,
 		deadline: deadline
 	});
+	console.log(deadline);
 
 	const { data, isLoading, error } = useQuery('subjects', getSubjects);
 

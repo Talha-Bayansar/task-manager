@@ -1,5 +1,4 @@
 import { useRouter } from 'next/dist/client/router';
-import Head from 'next/head';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { UpdateTaskPage, useTasksContext } from '../../../tasks';
@@ -15,14 +14,7 @@ const UpdateTask = () => {
 	if (isLoading) return <span>Aan het laden...</span>;
 	if (error || data['error']) return <span>Error</span>;
 
-	return (
-		<div>
-			<Head>
-				<title>Edit task</title>
-			</Head>
-			<UpdateTaskPage task={data} />
-		</div>
-	);
+	return <UpdateTaskPage task={data} />;
 };
 
 export default UpdateTask;
