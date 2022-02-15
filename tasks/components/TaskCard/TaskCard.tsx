@@ -8,10 +8,12 @@ import { useRouter } from 'next/dist/client/router';
 interface Props {
 	task: Task;
 	className?: any;
+	refetch?: () => any;
 }
 
-export const TaskCard = ({ task, className }: Props) => {
+export const TaskCard = ({ task, className, refetch }: Props) => {
 	const router = useRouter();
+	const { putTask } = useTasksContext();
 	const getDeadlineDate = () => {
 		return new Date(task.deadline).toLocaleDateString('default', {
 			day: '2-digit',
@@ -29,6 +31,15 @@ export const TaskCard = ({ task, className }: Props) => {
 
 	const handleEditClick = () => {
 		router.push(`/tasks/${task.id}/update`);
+	};
+
+	const handleCheck = async () => {
+		await putTask(task.id, {
+			...task,
+			isChecked: !task.isChecked,
+			subject: task.subject.id
+		});
+		refetch();
 	};
 
 	return (
@@ -55,6 +66,7 @@ export const TaskCard = ({ task, className }: Props) => {
 					className={`${styles.taskCardCheckButton} ${
 						task.isChecked && styles.checked
 					}`}
+					onClick={handleCheck}
 				></button>
 			</div>
 		</div>

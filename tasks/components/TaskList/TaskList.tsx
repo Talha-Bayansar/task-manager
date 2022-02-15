@@ -9,7 +9,10 @@ interface Props {
 }
 
 export const TaskList = ({ tab }: Props) => {
-	const { data, isLoading, error } = useQuery(tab.name, tab.fetchFunction);
+	const { data, isLoading, error, refetch } = useQuery(
+		tab.name,
+		tab.fetchFunction
+	);
 
 	if (isLoading) return <span>Aan het laden...</span>;
 	if (error || data['error']) return <span>Error</span>;
@@ -22,6 +25,7 @@ export const TaskList = ({ tab }: Props) => {
 							className={styles.taskListItem}
 							key={task.id}
 							task={task}
+							refetch={refetch}
 						/>
 				  ))
 				: 'Er zijn geen taken hier!'}
