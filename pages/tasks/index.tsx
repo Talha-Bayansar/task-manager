@@ -1,6 +1,7 @@
 import Head from 'next/head';
+import { TasksPage } from '../../tasks';
 
-export default function TasksPage() {
+export default function Tasks() {
 	return (
 		<div>
 			<Head>

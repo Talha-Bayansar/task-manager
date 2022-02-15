@@ -9,6 +9,7 @@ interface Props {
 	inputOptions?: any;
 	className?: any;
 	value?: any;
+	onChange?: (e: any) => any;
 }
 
 export const InputField = ({
@@ -18,7 +19,8 @@ export const InputField = ({
 	required = false,
 	inputOptions,
 	className,
-	value
+	value,
+	onChange
 }: Props) => {
 	return (
 		<div className={`${styles.inputField} ${className}`}>
@@ -28,7 +30,8 @@ export const InputField = ({
 				name={name}
 				required={required}
 				{...inputOptions}
-				defaultValue={value}
+				value={value}
+				onChange={onChange}
 			/>
 		</div>
 	);

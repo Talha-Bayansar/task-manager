@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 import { Task } from '..';
 import { useHttpContext } from '../../http';
 import { TaskDto } from '../models/task.dto';
@@ -8,8 +8,8 @@ interface ITasksContext {
 	getTasksToday: () => Promise<Task[]>;
 	getTasksDone: () => Promise<Task[]>;
 	createTask: (taskDto: TaskDto) => Promise<void>;
-	getTask: (id: string) => Promise<Task>;
-	putTask: (task: Task) => Promise<void>;
+	getTask: (id: string | string[]) => Promise<Task>;
+	putTask: (id: string, task: TaskDto) => Promise<void>;
 }
 
 const TasksContext = createContext<ITasksContext | null>(null);
@@ -47,8 +47,8 @@ export const TasksProvider = ({ children }) => {
 		console.log(data);
 	};
 
-	const putTask = async (task: Task) => {
-		const data = await put(`${tasksUrl}/${task.id}`, task);
+	const putTask = async (id: string, task: TaskDto) => {
+		const data = await put(`${tasksUrl}/${id}`, task);
 		console.log(data);
 	};
 

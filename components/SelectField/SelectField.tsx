@@ -1,22 +1,38 @@
 import React from 'react';
-import { Subject } from '../../subjects';
 import styles from './SelectField.module.scss';
 
 interface Props {
 	className?: any;
+	data: any[];
+	label: string;
 	name: string;
-	subjects: Subject[];
+	required?: boolean;
 	value?: any;
+	onChange?: (e: any) => any;
 }
 
-export const SelectField = ({ className, name, subjects, value }: Props) => {
+export const SelectField = ({
+	className,
+	data,
+	label,
+	name,
+	required = false,
+	value,
+	onChange
+}: Props) => {
 	return (
 		<div className={`${styles.selectField} ${className}`}>
-			<label htmlFor={name}>Subject</label>
-			<select defaultValue={value} name={name} id={name}>
-				{subjects?.map((subject) => (
-					<option key={subject.id} value={subject.id}>
-						{subject.title}
+			<label htmlFor={name}>{label}</label>
+			<select
+				name={name}
+				required={required}
+				value={value}
+				onChange={onChange}
+			>
+				<option value="">Geen</option>
+				{data.map((item) => (
+					<option key={item.id} value={item.id}>
+						{item.title}
 					</option>
 				))}
 			</select>

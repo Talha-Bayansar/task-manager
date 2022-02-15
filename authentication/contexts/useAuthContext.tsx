@@ -34,12 +34,8 @@ export const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (router.pathname !== '/login') {
-			console.log('Checking if logged in...');
 			if (!getToken()) {
-				setIsAuthenticated(false);
 				router.push('/login');
-			} else {
-				setIsAuthenticated(true);
 			}
 		}
 	}, [router]);

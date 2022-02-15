@@ -11,11 +11,12 @@ interface Props {
 export const TaskList = ({ tab }: Props) => {
 	const { data, isLoading, error } = useQuery(tab.name, tab.fetchFunction);
 
+	if (isLoading) return <span>Aan het laden...</span>;
+	if (error || data['error']) return <span>Error</span>;
+
 	return (
 		<div className={styles.taskList}>
-			{isLoading
-				? 'Is loading...'
-				: data.length > 0
+			{data.length > 0
 				? data.map((task) => (
 						<TaskCard
 							className={styles.taskListItem}
@@ -23,7 +24,7 @@ export const TaskList = ({ tab }: Props) => {
 							task={task}
 						/>
 				  ))
-				: 'There are no tasks here!'}
+				: 'Er zijn geen taken hier!'}
 		</div>
 	);
 };

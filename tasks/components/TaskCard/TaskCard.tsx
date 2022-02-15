@@ -12,7 +12,6 @@ interface Props {
 
 export const TaskCard = ({ task, className }: Props) => {
 	const router = useRouter();
-	const { setUpdateTask } = useTasksContext();
 	const getDeadlineDate = () => {
 		return new Date(task.deadline).toLocaleDateString('default', {
 			day: '2-digit',
@@ -29,8 +28,7 @@ export const TaskCard = ({ task, className }: Props) => {
 	};
 
 	const handleEditClick = () => {
-		setUpdateTask(task.id);
-		router.push(`/tasks/update`);
+		router.push(`/tasks/${task.id}/update`);
 	};
 
 	return (
