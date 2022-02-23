@@ -43,12 +43,21 @@ export const TasksProvider = ({ children }) => {
 	};
 
 	const createTask = async (taskDto: TaskDto) => {
-		const data = await post(`${tasksUrl}`, taskDto);
+		const deadline = new Date(taskDto.deadline).toISOString();
+
+		const data = await post(`${tasksUrl}`, {
+			...taskDto,
+			deadline: deadline
+		});
 		console.log(data);
 	};
 
 	const putTask = async (id: string, task: TaskDto) => {
-		const data = await put(`${tasksUrl}/${id}`, task);
+		const deadline = new Date(task.deadline).toISOString();
+		const data = await put(`${tasksUrl}/${id}`, {
+			...task,
+			deadline: deadline
+		});
 		console.log(data);
 	};
 
