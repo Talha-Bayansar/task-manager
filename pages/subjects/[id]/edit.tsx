@@ -1,8 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useSubjectsContext } from '../../../subjects';
-import { EditSubjectsPage } from '../../../subjects/pages/EditSubjectsPage/EditSubjectsPage';
+import { EditSubjectsPage, useSubjectsContext } from '../../../subjects';
 
 const EditSubject = () => {
 	const router = useRouter();

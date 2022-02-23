@@ -1,0 +1,12 @@
+.updateTaskPage {
+	margin-top: 3rem;
+
+	.taskForm {
+		display: flex;
+		flex-direction: column;
+
+		.formField {
+			margin: 1rem 0;
+		}
+	}
+}

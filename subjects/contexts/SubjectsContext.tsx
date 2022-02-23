@@ -6,13 +6,14 @@ interface ISubjectsContext {
 	getSubjects: () => Promise<Subject[]>;
 	getSubject: (id: string | string[]) => Promise<Subject>;
 	editSubject: (id: string, subjectDto: SubjectDto) => Promise<Subject>;
+	createSubject: (subjectDto: SubjectDto) => Promise<Subject>;
 }
 
 const SubjectsContext = createContext<ISubjectsContext | null>(null);
 
 export const SubjectsProvider = ({ children }) => {
 	const subjectsUrl = `${process.env.NEXT_PUBLIC_API_URL}/subjects`;
-	const { get, put } = useHttpContext();
+	const { get, put, post } = useHttpContext();
 
 	const getSubjects = async () => {
 		const data = await get<Subject[]>(subjectsUrl);
@@ -24,12 +25,17 @@ export const SubjectsProvider = ({ children }) => {
 		return data;
 	};
 
+	const createSubject = async (subjectDto: SubjectDto) => {
+		const data = await post<Subject>(subjectsUrl, subjectDto);
+		return data;
+	};
+
 	const editSubject = async (id: string, subjectDto: SubjectDto) => {
 		const data = await put<Subject>(`${subjectsUrl}/${id}`, subjectDto);
 		return data;
 	};
 
-	const api = { getSubjects, getSubject, editSubject };
+	const api = { getSubjects, getSubject, editSubject, createSubject };
 
 	return (
 		<SubjectsContext.Provider value={api}>
