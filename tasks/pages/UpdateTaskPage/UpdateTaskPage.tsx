@@ -22,13 +22,11 @@ export const UpdateTaskPage = ({ task }: Props) => {
 		description: task.description,
 		deadline: deadline
 	});
-	console.log(deadline);
 
 	const { data, isLoading, error } = useQuery('subjects', getSubjects);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(formValues);
 		await putTask(task.id, formValues);
 		router.push('/');
 	};

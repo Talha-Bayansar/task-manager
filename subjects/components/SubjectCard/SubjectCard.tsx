@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './SubjectCard.module.scss';
 import { Subject } from '../..';
 import { MdModeEdit } from 'react-icons/md';
+import { useRouter } from 'next/dist/client/router';
 
 interface Props {
 	subject: Subject;
@@ -9,8 +10,9 @@ interface Props {
 }
 
 export const SubjectCard = ({ subject, className }: Props) => {
-	const handleEditClick = (e: any) => {
-		console.log(subject);
+	const router = useRouter();
+	const handleEditClick = () => {
+		router.push(`subjects/${subject.id}/edit`);
 	};
 	return (
 		<div

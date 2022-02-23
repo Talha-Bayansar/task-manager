@@ -20,25 +20,21 @@ export const TasksProvider = ({ children }) => {
 
 	const getTasks = async () => {
 		const data = await get<Task[]>(tasksUrl);
-		console.log(data);
 		return data;
 	};
 
 	const getTask = async (id: string) => {
 		const data = await get<Task>(`${tasksUrl}/${id}`);
-		console.log(data);
 		return data;
 	};
 
 	const getTasksToday = async () => {
 		const data = await get<Task[]>(`${tasksUrl}/today`);
-		console.log(data);
 		return data;
 	};
 
 	const getTasksDone = async () => {
 		const data = await get<Task[]>(`${tasksUrl}/done`);
-		console.log(data);
 		return data;
 	};
 
@@ -49,7 +45,6 @@ export const TasksProvider = ({ children }) => {
 			...taskDto,
 			deadline: deadline
 		});
-		console.log(data);
 	};
 
 	const putTask = async (id: string, task: TaskDto) => {
@@ -58,7 +53,6 @@ export const TasksProvider = ({ children }) => {
 			...task,
 			deadline: deadline
 		});
-		console.log(data);
 	};
 
 	const api = {
