@@ -1,0 +1,54 @@
+.taskCard {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+	border-radius: 20px;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+	.taskCardDetails {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+
+		.taskCardHeading {
+			display: block;
+			margin-top: 1rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.taskCardDeadline {
+			font-size: 12px;
+			color: #3c3c3c;
+		}
+	}
+
+	.taskCardActions {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+
+		.taskCardEditButton {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 0.25rem;
+			background-color: black;
+			border: none;
+			border-radius: 4px;
+		}
+
+		.taskCardCheckButton {
+			display: block;
+			border: 1px solid black;
+			border-radius: 50%;
+			padding: 0.75rem;
+			background-color: transparent;
+		}
+
+		.checked {
+			background-color: black;
+		}
+	}
+}

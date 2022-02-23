@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { CreateActionButton, Tabs, TaskList, useTasksContext } from '../..';
+import { Tabs, TaskList, useTasksContext } from '../..';
+import { CreateActionButton } from '../../../components';
 import styles from './TaskPage.module.scss';
 
 export interface Tab {
@@ -77,7 +78,7 @@ export const TasksPage = () => {
 			/>
 			<TaskList tab={getActiveTab()} />
 			<div className={styles.spacing} />
-			<CreateActionButton />
+			<CreateActionButton title="Create Task" url="/tasks/create" />
 		</div>
 	);
 };

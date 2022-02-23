@@ -4,3 +4,4 @@ export * from './InputField/InputField';
 export * from './SubmitButton/SubmitButton';
 export * from './Chip/Chip';
 export * from './SelectField/SelectField';
+export * from './CreateActionButton/CreateActionButton';
